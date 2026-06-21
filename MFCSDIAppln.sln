@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
@@ -6,6 +6,28 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MFCSDIAppln", "MFCSDIAppln\MFCSDIAppln.vcxproj", "{23201725-A05D-4173-8FAB-0A28CAF815C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfSDIAppln", "WpfSDIAppln\WpfSDIAppln.csproj", "{52622294-A720-4381-A774-1A986769A073}"
+EndProject
+Project("{66A26720-8FB5-11D2-AA7E-00C04F688DDE}") = "web-app", "web-app", "{7F4F56B7-BD36-4F73-9F4E-1F95CFD3F4D1}"
+    ProjectSection(SolutionItems) = preProject
+        web-app\\.gitignore = web-app\\.gitignore
+        web-app\\README.md = web-app\\README.md
+        web-app\\app\\globals.css = web-app\\app\\globals.css
+        web-app\\app\\layout.tsx = web-app\\app\\layout.tsx
+        web-app\\app\\page.tsx = web-app\\app\\page.tsx
+        web-app\\app\\providers.tsx = web-app\\app\\providers.tsx
+        web-app\\app\\workflows\\protocol-planning\\page.tsx = web-app\\app\\workflows\\protocol-planning\\page.tsx
+        web-app\\features\\protocol-planning\\components\\protocol-planning-page.tsx = web-app\\features\\protocol-planning\\components\\protocol-planning-page.tsx
+        web-app\\features\\protocol-planning\\schemas\\protocol-planning.schema.ts = web-app\\features\\protocol-planning\\schemas\\protocol-planning.schema.ts
+        web-app\\features\\protocol-planning\\types\\protocol-planning.types.ts = web-app\\features\\protocol-planning\\types\\protocol-planning.types.ts
+        web-app\\features\\protocol-planning\\utils\\calculate-protocol-plan.ts = web-app\\features\\protocol-planning\\utils\\calculate-protocol-plan.ts
+        web-app\\next-env.d.ts = web-app\\next-env.d.ts
+        web-app\\next.config.ts = web-app\\next.config.ts
+        web-app\\package.json = web-app\\package.json
+        web-app\\postcss.config.js = web-app\\postcss.config.js
+        web-app\\styles\\tokens.css = web-app\\styles\\tokens.css
+        web-app\\tailwind.config.ts = web-app\\tailwind.config.ts
+        web-app\\tsconfig.json = web-app\\tsconfig.json
+    EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
