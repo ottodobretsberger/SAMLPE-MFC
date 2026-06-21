@@ -36,8 +36,13 @@ public:
 
 protected:
 	DECLARE_MESSAGE_MAP()
+private:
+	bool m_isUpdatingText;
+	void UpdateReportCompleteness();
+
 public:
 	virtual void OnInitialUpdate();
+	afx_msg void OnEnChange();
 };
 
 

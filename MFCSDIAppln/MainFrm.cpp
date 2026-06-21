@@ -99,59 +99,47 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 BOOL CMainFrame::SwitchView(CRuntimeClass* pNewView)
 {
 	CView* pOldView = GetActiveView();
-
-	// If no active view for the frame, return FALSE because
-	// this function retrieves the current document from the active
-	// view.
 	if (pOldView == NULL)
 		return FALSE;
 
-	// If we're already displaying this kind of view, no need
-	// to go further.
-	if ((pOldView->IsKindOf(pNewView)) == TRUE)
+	if (pOldView->IsKindOf(pNewView))
 		return TRUE;
 
-	// Get pointer to CDocument object so that it can be used
-	// in the creation process of the new view.
-	CDocument * pDoc = pOldView->GetDocument();
+	CDocument* pDoc = pOldView->GetDocument();
+	if (pDoc == NULL)
+		return FALSE;
 
-	// Set flag so that document will not be deleted when
-	// view is destroyed.
+	// Prevent document from being deleted when old view is destroyed.
 	BOOL bAutoDelete = pDoc->m_bAutoDelete;
 	pDoc->m_bAutoDelete = FALSE;
-	// hide existing view
-	pOldView->ShowWindow(SW_HIDE);
 
-	// restore flag
-	pDoc->m_bAutoDelete = bAutoDelete;
-	
+	// CreateView uses AFX_IDW_PANE_FIRST. Move old view off that ID first.
+	pOldView->SetDlgCtrlID(AFX_IDW_PANE_FIRST + 1);
+
 	CCreateContext context;
-
-	// Create new view and redraw.
-	context.m_pNewViewClass = pNewView;
 	context.m_pCurrentDoc = pDoc;
+	context.m_pNewViewClass = pNewView;
+	context.m_pNewDocTemplate = NULL;
+	context.m_pLastView = NULL;
+	context.m_pCurrentFrame = NULL;
 
-	CWnd *pWnd = CreateView(&context);
-
-
-	CView* pNewActiveView = STATIC_DOWNCAST(CView, CreateView(&context));  // Now we can create a new view and get rid of the previous one  
-
+	CView* pNewActiveView = STATIC_DOWNCAST(CView, CreateView(&context));
 	if (pNewActiveView == NULL)
 	{
+		pOldView->SetDlgCtrlID(AFX_IDW_PANE_FIRST);
+		pDoc->m_bAutoDelete = bAutoDelete;
 		TRACE1("Warning: Dynamic create of view type %Fs failed\n", pNewView->m_lpszClassName);
 		return FALSE;
 	}
 
-	if (pNewActiveView != NULL)
-	{
-		pNewActiveView->ShowWindow(SW_SHOW);
-		pNewActiveView->OnInitialUpdate();
-		SetActiveView(pNewActiveView);
-		RecalcLayout();
-	}
+	pNewActiveView->SetDlgCtrlID(AFX_IDW_PANE_FIRST);
+	pNewActiveView->OnInitialUpdate();
+	pNewActiveView->ShowWindow(SW_SHOW);
+	SetActiveView(pNewActiveView);
+	RecalcLayout();
 
-	// Delete existing view
 	pOldView->DestroyWindow();
+	pDoc->m_bAutoDelete = bAutoDelete;
 
 	return TRUE;
 }

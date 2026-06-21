@@ -13,6 +13,9 @@
 #define IDC_EDIT1                       1000
 #define IDC_EDIT2                       1001
 #define IDC_COMBO1                      1002
+#define IDC_EDIT3                       1003
+#define IDC_BUTTON1                     1004
+#define IDC_STATIC_RESULT               1005
 #define ID_COMBO                        32771
 
 // Next default values for new objects
