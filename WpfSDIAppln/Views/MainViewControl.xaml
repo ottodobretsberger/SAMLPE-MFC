@@ -5,10 +5,54 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
-        <TextBlock Text="{Binding DisplayText}" 
-                   FontSize="24"
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
+    <Grid Background="#F5F8FC" Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding Title}" FontSize="26" FontWeight="SemiBold" Foreground="#202D40"/>
+        <TextBlock Grid.Row="1" Text="{Binding Subtitle}" FontSize="14" Foreground="#40546C" Margin="0,4,0,16"/>
+
+        <ItemsControl Grid.Row="2" ItemsSource="{Binding MetricCards}" Margin="0,0,0,16">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="White" BorderBrush="#DCE2EA" BorderThickness="1" Margin="0,0,10,0" Padding="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="4"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Background="{Binding AccentColor}" Margin="-10,-10,-10,8"/>
+                            <TextBlock Grid.Row="1" Text="{Binding Title}" Foreground="#3F3F46"/>
+                            <TextBlock Grid.Row="2" Text="{Binding Value}" FontSize="28" FontWeight="SemiBold" Foreground="#202D40" Margin="0,4,0,2"/>
+                            <TextBlock Grid.Row="3" Text="{Binding Detail}" Foreground="#5C6673" TextWrapping="Wrap"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Border Grid.Row="3" Background="White" BorderBrush="#DCE2EA" BorderThickness="1" Padding="12">
+            <StackPanel>
+                <TextBlock Text="Today's Throughput Actions" Foreground="#283A52" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                <ItemsControl ItemsSource="{Binding ThroughputActions}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StringFormat={}{0}}" Foreground="#4A5565" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
